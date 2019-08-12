@@ -1,0 +1,141 @@
+﻿<#+
+    void CustomizeNamePropertyOfSubClassOfRmObject(Property prop)
+    {
+        if (prop != null && prop.ClassInfo != null && prop.Name == "Name" 
+            && (prop.ClassInfo.Extends == "RmObject" || prop.ClassInfo.Extends == "Ventum.Bond2.DomainModels.RmObject"))
+        {
+            prop.Name = "OwnName";
+            prop.AddDefault("column", "Name");
+            prop.AddDefault("access", "readonly");
+        }
+    }
+
+    void CustomizeNamePropertyOfSubClassOfCustomType(Property prop)
+    {
+        if (prop != null && prop.ClassInfo != null  && prop.Name == "Name" 
+            && (prop.ClassInfo.Extends == "CustomType" || prop.ClassInfo.Extends == "Ventum.Bond2.DomainModels.CustomType"))
+        {
+            prop.Name = "OwnName";
+            prop.AddDefault("column", "Name");
+            prop.AddDefault("access", "readonly");
+        }
+    }
+
+    void FixOwnerPropertyAccess(Property prop)
+    {
+        if (prop != null && prop.TagName == "many-to-one" && prop.Name == "Owner")
+        {
+            prop.AddDefault("access", "property");
+        }
+    }
+
+    void MapAttributes(Property prop)
+    {
+        MapAttributes(prop, "m");
+    }
+
+    void MapAttributes(Property prop, string aliasName)
+    {
+        aliasName = string.IsNullOrEmpty(aliasName) ? "" : $"{aliasName}.";
+        foreach(var attr in prop) 
+        {   
+            WriteLine($"{aliasName}{Mapper.MapAttributeMethod(prop, attr.Key)}({Mapper.MapAttributeValue(prop, attr.Key)});");
+        }
+    }
+
+    void MapPropertyList(IList<Property> properties)
+    {   
+        foreach(var prop in properties) {    
+            MapProperty(prop); 
+        }
+    }
+
+    void MapProperty(Property prop) 
+    {
+        if (prop != null)
+            MapProperty(prop, "m", "");
+    }
+
+    void MapProperty(Property prop, string aliasName, string parentAlias)
+    {
+        if (prop.IsEmbeded)
+            MapEmbededProperty(prop, aliasName, parentAlias);
+        else
+            MapNormalProperty(prop, aliasName, parentAlias);
+    }    
+
+    void MapNormalProperty(Property prop, string aliasName, string parentAlias)
+    {   
+        parentAlias = string.IsNullOrEmpty(parentAlias) ? "" : $"{parentAlias}.";
+        var propertyPath = string.IsNullOrEmpty(prop.Name) ? "" : $"x => x.{prop.Name}, ";
+
+        if (!prop.IgnoreOwnAttributes)
+        {
+#>
+<#=parentAlias#><#=Mapper.MapAttributeMethod(prop, prop.TagName)#>(<#=propertyPath#><#=aliasName#> =>
+{
+<#+         
+            PushIndent("    ");
+            MapAttributes(prop, aliasName);
+            
+            foreach(var p in prop.ChildProperties)
+            {
+                MapProperty(p, "n", "m");
+            }
+        }
+        else 
+        {
+#>
+<#=parentAlias#><#=Mapper.MapAttributeMethod(prop, prop.TagName)#>(
+<#+ 
+            PushIndent("    ");
+        }
+        if (prop.ExtendedPropertySets.Any())
+        {
+            PopIndent();
+            var count = 0;
+            foreach(var propertySet in prop.ExtendedPropertySets)
+            {                
+                count++;
+                if (prop.IgnoreOwnAttributes && count == 1)
+                {
+#>
+<#=aliasName#> =>
+{
+<#+                   
+                }
+                else
+                {
+#>
+}, <#=aliasName#> =>
+{
+<#+
+                }
+
+                PushIndent("    ");
+                foreach(var p in propertySet)
+                {
+                    MapProperty(p, "n", aliasName);
+                }
+                PopIndent();
+            }            
+#>
+});
+
+<#+
+        }
+        else
+        {
+            PopIndent();
+#>
+});
+
+<#+
+        }        
+    }
+
+    void MapEmbededProperty(Property prop, string aliasName, string parentAlias)
+    {
+        MapAttributes(prop, aliasName);
+    }
+#>

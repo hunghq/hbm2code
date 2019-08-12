@@ -1,0 +1,46 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ include file="Include.Imports.t4"#>
+<#@ include file="Include.Usings.t4"#>
+<#@ include file="Include.PropertyMap.t4"#>
+<#
+    string templatePath = Host.ResolvePath(string.Empty);
+    var hbmFolder = Path.Combine(templatePath, @"..\..\Hbm2Code.DomainModels\Hbm");
+	IList<ClassInfo> clazzList = HbmLoader.LoadClassInfos(hbmFolder);
+    var customizer = new HbmCustomizer();
+    customizer.Register(CustomizeNamePropertyOfSubClassOfRmObject);
+    customizer.Register(CustomizeNamePropertyOfSubClassOfCustomType);
+    customizer.Register(FixOwnerPropertyAccess);
+#>
+
+namespace Hbm2Code.Mapping
+{
+<#
+    foreach(var clazz in clazzList)
+    {
+        customizer.Customize(clazz);
+#>
+    public class <#=Mapper.MapClassName(clazz)#>Map : <#=Mapper.MapClassMapping(clazz)#>
+    {
+        public <#=Mapper.MapClassName(clazz)#>Map()
+        {
+<#
+        if (clazz.ClassType != ClassType.SubClass)
+        {
+#>
+            Table("<#=Mapper.MapTableName(clazz)#>");
+<#
+        }
+        PushIndent("            ");
+        MapAttributes(clazz.OwnProperty, null);
+        WriteLine("");
+        MapPropertyList(clazz.GetChildProperties().ToList());
+        PopIndent();
+#>
+        }
+    }
+
+<#
+    }
+#>
+}

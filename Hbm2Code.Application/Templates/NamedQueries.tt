@@ -1,0 +1,27 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Xml.Linq" #>
+<#@ assembly name="netstandard" #>
+<#@ assembly name="$(SolutionDir)\lib\Hbm2Code.dll" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="Hbm2Code" #>
+<#@ output extension=".hbm.xml" #>
+<#
+    string templatePath = Host.ResolvePath(string.Empty);
+    var hbmFolder = Path.Combine(templatePath, @"..\..\Hbm2Code.DomainModels\Hbm");
+	IList<XElement> queries = NamedQueryLoader.LoadQueries(hbmFolder);
+#>
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+<#
+    foreach(var query in queries)
+    {
+#>
+        <#=query.ToString()#>
+
+<#
+
+    }
+#>
+</hibernate-mapping>

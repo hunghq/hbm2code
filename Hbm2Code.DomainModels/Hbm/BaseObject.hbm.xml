@@ -4,7 +4,7 @@
     <id name="Id" type="Int64">
       <generator class="assigned"/>
     </id>
-    <version name="Version" column="Version" type="Int64" unsaved-value="0"/>
     <property name="Name" type="String" not-null="false" length="255" index="IX_EntityName"/>
+    <version name="Version" column="Version" type="Int64" unsaved-value="0"/>
   </class>
 </hibernate-mapping>

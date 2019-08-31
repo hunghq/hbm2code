@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Worker" abstract="true">
+    <id name="Id" type="Int64">
+      <generator class="assigned"/>
+    </id>
+    <discriminator column="Type" type="String"/>
+    
+    <property name="Name" />
+  </class>
+
+  <subclass discriminator-value="FW" name="ForeignWorker">
+    <property name="PassportNo" />
+  </subclass>
+
+  <subclass discriminator-value="DW" name="DomesticWorker">
+    <property name="SocialSecurityNo" />
+  </subclass>
+  
+</hibernate-mapping>

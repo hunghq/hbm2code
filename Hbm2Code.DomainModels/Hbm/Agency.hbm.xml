@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <joined-subclass name="Agency" extends="BaseObject">
+    <key column="Id" foreign-key="FK_Application" />
+
+    <property name="Name" type="String" not-null="true" length="255" unique="true"/>
+
+    <property name="Guid" type="Guid"/>
+
+    <many-to-one name="Area" column="AreaId" lazy="proxy" not-null="true" foreign-key="FK_Agency_Area"/>
+  </joined-subclass>
+
+  <class name="HeadQuarter" table="HeadQuarter">
+    <id name="Id" type="Int64">
+      <generator class="foreign">
+        <param name="property">Agency</param>
+      </generator>
+    </id>
+    <one-to-one name="Agency" constrained="true" foreign-key="FK_Agency_HeadQuarter"/>
+  </class>
+</hibernate-mapping>

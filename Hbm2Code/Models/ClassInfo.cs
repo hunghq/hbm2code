@@ -9,11 +9,9 @@ namespace Hbm2Code
         public string ClassName { get; set; }
         public ClassType ClassType { get; set; }
         public string TableName { get; set; }
-        public string Abstract { get; set; }
 
         public string Proxy { get; set; }
         public string Extends { get; set; }
-        public string DiscriminatorValue { get; set; }
 
         public ClassInfo()
         {

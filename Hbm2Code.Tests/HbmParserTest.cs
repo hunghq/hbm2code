@@ -12,7 +12,6 @@ namespace Hbm2Code.Tests
         {
             IList<ClassInfo> clazzInfos = TestUtils.ParseHbm("BaseObject.hbm.xml");
             var clazz = clazzInfos.AssertHasClass("BaseObject", ClassType.RootClass);
-            clazz.Abstract.Should().Be("true");
 
             clazz.OwnProperty.Should()
                 .HaveTagName("class")
@@ -38,10 +37,10 @@ namespace Hbm2Code.Tests
             IList<ClassInfo> clazzInfos = TestUtils.ParseHbm("Worker.hbm.xml");
 
             var foreignWorker = clazzInfos.AssertHasClass("ForeignWorker", ClassType.SubClass);
-            foreignWorker.DiscriminatorValue.Should().Be("FW");
+            foreignWorker.OwnProperty.Should().HaveAttribute("discriminator-value", "FW");
 
             var domesticWorker = clazzInfos.AssertHasClass("DomesticWorker", ClassType.SubClass);
-            domesticWorker.DiscriminatorValue.Should().Be("DW");
+            domesticWorker.OwnProperty.Should().HaveAttribute("discriminator-value", "DW");
         }
     }
 }

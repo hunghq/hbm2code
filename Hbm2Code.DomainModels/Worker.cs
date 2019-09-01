@@ -7,11 +7,11 @@
 
     public class ForeignWorker : Worker
     {
-        public string PassportNo { get; set; }
+        public virtual string PassportNo { get; set; }
     }
 
     public class DomesticWorker : Worker
     {
-        public string SocialSecurityNo { get; set; }
+        public virtual string SocialSecurityNo { get; set; }
     }
 }

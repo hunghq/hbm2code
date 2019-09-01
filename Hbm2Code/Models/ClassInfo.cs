@@ -35,7 +35,7 @@ namespace Hbm2Code
                 string.Equals(x.TagName, tagName, StringComparison.InvariantCultureIgnoreCase)) as T;
         }
 
-        public IList<T> GetChildProperies<T>(string tagName) where T : Property
+        public IList<T> GetChildProperties<T>(string tagName) where T : Property
         {
             return childProperties.OfType<T>()
                 .Where(x => string.Equals(x.TagName, tagName, StringComparison.InvariantCultureIgnoreCase))

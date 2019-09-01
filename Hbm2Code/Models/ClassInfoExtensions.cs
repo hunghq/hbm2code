@@ -12,12 +12,12 @@ namespace Hbm2Code
 
         public static CompositeId GetCompositeId(this ClassInfo clazz) => clazz.GetChildProperty<CompositeId>("composite-id");
 
-        public static IList<Property> GetProperties(this ClassInfo clazz) => clazz.GetChildProperies<Property>("property");
+        public static IList<Property> GetProperties(this ClassInfo clazz) => clazz.GetChildProperties<Property>("property");
 
-        public static IList<Property> GetManyToOneProperties(this ClassInfo clazz) => clazz.GetChildProperies<Property>("many-to-one");
+        public static IList<Property> GetManyToOneProperties(this ClassInfo clazz) => clazz.GetChildProperties<Property>("many-to-one");
 
-        public static IList<Property> GetOneToOneProperties(this ClassInfo clazz) => clazz.GetChildProperies<Property>("one-to-one");
+        public static IList<Property> GetOneToOneProperties(this ClassInfo clazz) => clazz.GetChildProperties<Property>("one-to-one");
 
-        public static IList<Set> GetSets(this ClassInfo clazz) => clazz.GetChildProperies<Set>("set");
+        public static IList<Set> GetSets(this ClassInfo clazz) => clazz.GetChildProperties<Set>("set");
     }
 }

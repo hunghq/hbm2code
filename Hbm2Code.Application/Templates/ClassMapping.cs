@@ -62,6 +62,25 @@ namespace Hbm2Code.Mapping
         }
     }
 
+    public class AreaMap : ClassMapping<Area>
+    {
+        public AreaMap()
+        {
+            Table("Area");
+
+            Id(x => x.Id, m =>
+            {
+                m.Generator(Generators.Assigned);
+                m.Type(NHibernateUtil.Int64);
+            });
+            
+            Property(x => x.Name, m =>
+            {
+            });
+            
+        }
+    }
+
     public class BaseObjectMap : ClassMapping<BaseObject>
     {
         public BaseObjectMap()
@@ -122,7 +141,6 @@ namespace Hbm2Code.Mapping
             Discriminator(m =>
             {
                 m.Column("Type");
-                m.Type(NHibernateUtil.String);
             });
             
             Property(x => x.Name, m =>

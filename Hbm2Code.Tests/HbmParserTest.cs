@@ -32,6 +32,17 @@ namespace Hbm2Code.Tests
         }
 
         [Fact]
+        public void ParseRootClass_WithDiscriminatorColumn()
+        {
+            IList<ClassInfo> clazzInfos = TestUtils.ParseHbm("Worker.hbm.xml");
+            var worker = clazzInfos.AssertHasClass("Worker", ClassType.RootClass);
+            Property discriminator = worker.GetDiscriminator();
+            discriminator.Should().NotBeNull();
+            discriminator.Should()
+                .HaveAttribute("column", "Type");
+        }
+
+        [Fact]
         public void ParseSubClass_WithDiscriminatorValue()
         {
             IList<ClassInfo> clazzInfos = TestUtils.ParseHbm("Worker.hbm.xml");

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <None Remove="Hbm\Agency.hbm.xml" />
+    <None Remove="Hbm\Area.hbm.xml" />
     <None Remove="Hbm\BaseObject.hbm.xml" />
     <None Remove="Hbm\Worker.hbm.xml" />
   </ItemGroup>
@@ -17,9 +18,11 @@
     <Content Include="Hbm\BaseObject.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Hbm\Area.hbm.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Hbm\Worker.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
 </Project>

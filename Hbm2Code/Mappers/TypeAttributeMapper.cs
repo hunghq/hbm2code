@@ -7,7 +7,6 @@ namespace Hbm2Code
     {
         public TypeAttributeMapper() : base(valueMapper: MapType)
         {
-
         }
 
         private static IDictionary<string, string> TypeMapper = new Dictionary<string, string>()

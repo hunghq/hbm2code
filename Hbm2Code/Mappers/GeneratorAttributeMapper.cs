@@ -19,8 +19,10 @@ namespace Hbm2Code
             {
                 case "assigned":
                     return "Generators.Assigned";
+
                 case "foreign":
                     return $"Generators.Foreign<{idProperty.ClassInfo.ClassName}>(y => y.{GetForeignKey(idProperty)})";
+
                 default:
                     throw new ArgumentException($"Class {idProperty.ClassInfo.ClassName} has unsupported Id generator: " + generatorClass);
             }

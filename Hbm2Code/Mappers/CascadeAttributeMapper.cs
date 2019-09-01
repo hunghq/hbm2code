@@ -14,14 +14,19 @@ namespace Hbm2Code
             {
                 case "none":
                     return "Cascade.None";
+
                 case "save-update":
                     return "Cascade.Persist";
+
                 case "delete-orphans":
                     return "Cascade.DeleteOrphans";
+
                 case "all-delete-orphan":
                     return "Cascade.All | Cascade.DeleteOrphans";
+
                 case "all":
                     return "Cascade.All";
+
                 default:
                     throw new ArgumentException("Invalid cascade: " + cascade);
             }

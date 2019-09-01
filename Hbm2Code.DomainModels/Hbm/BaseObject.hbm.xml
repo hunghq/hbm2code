@@ -2,9 +2,9 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Hbm2Code.DomainModels" namespace="Hbm2Code.DomainModels">
   <class name="BaseObject" abstract="true" table="BaseObject">
     <id name="Id" type="Int64">
-      <generator class="assigned"/>
+      <generator class="assigned" />
     </id>
-    <property name="Name" type="String" not-null="false" length="255" index="IX_EntityName"/>
-    <version name="Version" column="Version" type="Int64" unsaved-value="0"/>
+    <property name="Name" type="String" not-null="false" length="255" index="IX_EntityName" />
+    <version name="Version" column="Version" type="Int64" unsaved-value="0" />
   </class>
 </hibernate-mapping>

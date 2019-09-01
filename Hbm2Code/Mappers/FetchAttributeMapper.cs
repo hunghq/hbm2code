@@ -17,8 +17,10 @@ namespace Hbm2Code
                     {
                         case "select":
                             return "FetchKind.Select";
+
                         case "join":
                             return "FetchKind.Join";
+
                         default:
                             throw new ArgumentException($"Invalid fetch kind: {fetchKind} in <{property.TagName}>");
                     }
@@ -28,8 +30,10 @@ namespace Hbm2Code
                     {
                         case "select":
                             return "CollectionFetchMode.Select";
+
                         case "join":
                             return "CollectionFetchMode.Join";
+
                         default:
                             throw new ArgumentException($"Invalid fetch kind: {fetchKind} in <{property.TagName}>");
                     }

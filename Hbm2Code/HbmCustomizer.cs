@@ -6,6 +6,7 @@ namespace Hbm2Code
     public class HbmCustomizer
     {
         private List<Action<Property>> customizers = new List<Action<Property>>();
+
         public void Register(Action<Property> customizer)
         {
             customizers.Add(customizer);

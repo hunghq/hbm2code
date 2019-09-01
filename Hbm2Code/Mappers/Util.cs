@@ -12,7 +12,7 @@ namespace Hbm2Code
 
             // Split the string into words.
             string[] words = input.Split(
-                new char[] {' ', '-', '_'},
+                new char[] { ' ', '-', '_' },
                 StringSplitOptions.RemoveEmptyEntries);
 
             // Combine the words.

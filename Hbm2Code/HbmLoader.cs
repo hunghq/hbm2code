@@ -10,7 +10,7 @@ namespace Hbm2Code
         public static IList<ClassInfo> LoadClassInfos(string hbmFolderPath)
         {
             var result = new List<ClassInfo>();
-            
+
             Console.WriteLine("Reading hbm files from " + hbmFolderPath);
             foreach (string file in Directory.GetFiles(hbmFolderPath, "*.hbm.xml", SearchOption.AllDirectories))
             {

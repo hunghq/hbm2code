@@ -7,7 +7,6 @@ namespace Hbm2Code.Parsers
     {
         public ComponentParser() : base("component")
         {
-
         }
 
         public override Property Parse(ClassInfo clazz, XElement element)

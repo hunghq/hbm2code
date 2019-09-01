@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Hbm2Code
+﻿namespace Hbm2Code
 {
-
     public interface IClassInfo
     {
         string ClassName { get; }

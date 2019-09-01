@@ -24,7 +24,7 @@ namespace Hbm2Code
         public virtual IReadOnlyList<Property> ChildProperties => Enumerable.Empty<Property>().ToList();
 
         public virtual IReadOnlyList<IReadOnlyList<Property>> ExtendedPropertySets => new List<List<Property>>();
-        
+
         public void AddAttributes(IDictionary<string, string> attributes)
         {
             foreach (var attribute in attributes)

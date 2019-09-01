@@ -1,5 +1,4 @@
-﻿using NHibernate.Mapping.ByCode;
-using System;
+﻿using System;
 using System.Text.RegularExpressions;
 
 namespace Hbm2Code
@@ -16,6 +15,7 @@ namespace Hbm2Code
             {
                 case "id":
                     return MapIdAccess(property, access);
+
                 default:
                     return MapFieldAccess(access);
             }
@@ -27,10 +27,13 @@ namespace Hbm2Code
             {
                 case "field.camelcase-underscore":
                     return "Accessor.Field";
+
                 case "property":
                     return "Accessor.Property";
+
                 case "readonly":
                     return "Accessor.ReadOnly";
+
                 default:
                     throw new ArgumentException("Invalid access value: " + access);
             }

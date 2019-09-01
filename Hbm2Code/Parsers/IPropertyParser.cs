@@ -2,7 +2,6 @@
 
 namespace Hbm2Code.Parsers
 {
-
     public interface IPropertyParser
     {
         string TagName { get; }

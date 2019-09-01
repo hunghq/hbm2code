@@ -8,6 +8,13 @@ namespace Hbm2Code
 {
     public class HbmParser
     {
+        private static readonly IDictionary<string, ClassType> classTypes = new Dictionary<string, ClassType>()
+        {
+            {"class", ClassType.RootClass },
+            {"subclass", ClassType.SubClass },
+            {"joined-subclass", ClassType.JoinedSubClass }
+        };
+
         private static readonly IDictionary<string, IPropertyParser> parsers = new List<IPropertyParser>()
         {
             new PropertyParser(),
@@ -23,18 +30,18 @@ namespace Hbm2Code
             new MapParser()
         }.ToDictionary(p => p.TagName.ToLowerInvariant());
 
-        private static readonly IDictionary<string, ClassType> classTypes = new Dictionary<string, ClassType>()
-        {
-            {"class", ClassType.RootClass },
-            {"subclass", ClassType.SubClass },
-            {"joined-subclass", ClassType.JoinedSubClass }
-        };
-
         private readonly XDocument hbmDocument;
 
         public HbmParser(XDocument hbmDocument)
         {
             this.hbmDocument = hbmDocument;
+        }
+
+        public static IPropertyParser GetPropertyParser(XElement element)
+        {
+            if (parsers.TryGetValue(element.Name.LocalName.ToLowerInvariant(), out var parser))
+                return parser;
+            throw new NotSupportedException($"No parser found for element <{element.Name.LocalName}>");
         }
 
         public IList<ClassInfo> Parse()
@@ -43,6 +50,13 @@ namespace Hbm2Code
                 .Where(x => classTypes.ContainsKey(x.Name.LocalName))
                 .Select(ParseClassInfo)
                 .ToList();
+        }
+
+        private static ClassType ParseClassType(XElement clazzElement)
+        {
+            if (classTypes.TryGetValue(clazzElement.Name.LocalName, out var classType))
+                return classType;
+            throw new ArgumentException($"Unsupported class type: {clazzElement.Name.LocalName}");
         }
 
         private ClassInfo ParseClassInfo(XElement clazzElement)
@@ -54,8 +68,6 @@ namespace Hbm2Code
                 TableName = clazzElement.TryGetAttributeValue("table"),
                 Proxy = clazzElement.TryGetAttributeValue("proxy"),
                 Extends = clazzElement.TryGetAttributeValue("extends"),
-                DiscriminatorValue = clazzElement.TryGetAttributeValue("discriminator-value"),
-                Abstract = clazzElement.TryGetAttributeValue("abstract")
             };
 
             var clazzProp = CommonParser.ParseProperty(clazz, clazzElement);
@@ -69,20 +81,6 @@ namespace Hbm2Code
                 clazz.AddChildProperty(GetPropertyParser(element).Parse(clazz, element));
 
             return clazz;
-        }
-
-        public static IPropertyParser GetPropertyParser(XElement element)
-        {
-            if (parsers.TryGetValue(element.Name.LocalName.ToLowerInvariant(), out var parser))
-                return parser;
-            throw new NotSupportedException($"No parser found for element <{element.Name.LocalName}>");
-        }
-
-        private static ClassType ParseClassType(XElement clazzElement)
-        {
-            if (classTypes.TryGetValue(clazzElement.Name.LocalName, out var classType))
-                return classType;
-            throw new ArgumentException($"Unsupported class type: {clazzElement.Name.LocalName}");
         }
     }
 }

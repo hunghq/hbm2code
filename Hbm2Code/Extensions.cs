@@ -10,7 +10,7 @@ namespace Hbm2Code
     {
         public static ExpandoObject Get(this ExpandoObject obj, string property)
         {
-            if(obj.AsDictionary().TryGetValue(property, out var value))
+            if (obj.AsDictionary().TryGetValue(property, out var value))
             {
                 return value;
             }

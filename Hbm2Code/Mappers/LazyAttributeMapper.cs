@@ -6,7 +6,6 @@ namespace Hbm2Code
     {
         public LazyAttributeMapper() : base(valueMapper: MapLazy)
         {
-
         }
 
         private static string MapLazy(Property property, string lazyType)
@@ -22,8 +21,10 @@ namespace Hbm2Code
                     {
                         case "true":
                             return "CollectionLazy.Lazy";
+
                         case "false":
                             return "CollectionLazy.NoLazy";
+
                         default:
                             throw new ArgumentException($"Unsupported lazy type: {lazyType} in <{property.TagName}>");
                     }
@@ -35,8 +36,10 @@ namespace Hbm2Code
                     {
                         case "proxy":
                             return "LazyRelation.Proxy";
+
                         case "false":
                             return "LazyRelation.NoLazy";
+
                         default:
                             throw new ArgumentException($"Unsupported lazy type: {lazyType} in <{property.TagName}>");
                     }

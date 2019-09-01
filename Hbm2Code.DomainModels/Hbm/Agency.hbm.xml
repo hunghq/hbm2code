@@ -3,11 +3,11 @@
   <joined-subclass name="Agency" extends="BaseObject">
     <key column="Id" foreign-key="FK_Application" />
 
-    <property name="Name" type="String" not-null="true" length="255" unique="true"/>
+    <property name="Name" type="String" not-null="true" length="255" unique="true" />
 
-    <property name="Guid" type="Guid"/>
+    <property name="Guid" type="Guid" />
 
-    <many-to-one name="Area" column="AreaId" lazy="proxy" not-null="true" foreign-key="FK_Agency_Area"/>
+    <many-to-one name="Area" column="AreaId" lazy="proxy" not-null="true" foreign-key="FK_Agency_Area" />
   </joined-subclass>
 
   <class name="HeadQuarter" table="HeadQuarter">
@@ -16,6 +16,6 @@
         <param name="property">Agency</param>
       </generator>
     </id>
-    <one-to-one name="Agency" constrained="true" foreign-key="FK_Agency_HeadQuarter"/>
+    <one-to-one name="Agency" constrained="true" foreign-key="FK_Agency_HeadQuarter" />
   </class>
 </hibernate-mapping>

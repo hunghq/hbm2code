@@ -51,10 +51,13 @@ namespace Hbm2Code
                     return (clazz.Proxy == null)
                         ? $"ClassMapping<{clazz.ClassName}>"
                         : $"ClassMapping<{ExtractProxyInterface(clazz)}>";
+
                 case ClassType.JoinedSubClass:
                     return $"JoinedSubclassMapping<{clazz.ClassName}>";
+
                 case ClassType.SubClass:
                     return $"SubclassMapping<{clazz.ClassName}>";
+
                 default:
                     throw new ArgumentException("Invalid class type: " + clazz.ClassType);
             }

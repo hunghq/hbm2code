@@ -6,7 +6,6 @@ namespace Hbm2Code.DomainModels
     {
         public Agency()
         {
-
         }
 
         public virtual Guid Guid { get; set; }
@@ -17,7 +16,6 @@ namespace Hbm2Code.DomainModels
     {
         public HeadQuarter()
         {
-
         }
 
         public virtual string Name { get; set; }

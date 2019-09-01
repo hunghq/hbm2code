@@ -16,7 +16,7 @@ namespace Hbm2Code.Tests
             clazz.OwnProperty.Should()
                 .HaveTagName("class")
                 .HaveAttribute("abstract", "true")
-                .NotHaveAttribute("table");
+                .HaveAttribute("table", "BaseObject");
         }
 
         [Fact]
@@ -27,7 +27,7 @@ namespace Hbm2Code.Tests
 
             clazz.OwnProperty.Should()
                 .HaveTagName("joined-subclass")
-                .NotHaveAttribute("table")
+                .HaveAttribute("table", "Agency")
                 .NotHaveAttribute("extends");
         }
 
@@ -37,7 +37,9 @@ namespace Hbm2Code.Tests
             IList<ClassInfo> clazzInfos = TestUtils.ParseHbm("Worker.hbm.xml");
 
             var foreignWorker = clazzInfos.AssertHasClass("ForeignWorker", ClassType.SubClass);
-            foreignWorker.OwnProperty.Should().HaveAttribute("discriminator-value", "FW");
+            foreignWorker.OwnProperty.Should()
+                .HaveAttribute("discriminator-value", "FW")
+                .NotHaveAttribute("table");
         }
 
         [Fact]
@@ -45,7 +47,9 @@ namespace Hbm2Code.Tests
         {
             IList<ClassInfo> clazzInfos = TestUtils.ParseHbm("Worker.hbm.xml");
             var domesticWorker = clazzInfos.AssertHasClass("DomesticWorker", ClassType.SubClass);
-            domesticWorker.OwnProperty.Should().HaveAttribute("discriminator-value", "DW");
+            domesticWorker.OwnProperty.Should()
+                .HaveAttribute("discriminator-value", "DW")
+                .NotHaveAttribute("table");
         }
     }
 }

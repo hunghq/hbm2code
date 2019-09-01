@@ -20,17 +20,12 @@ namespace Hbm2Code.Mapping
     {
         customizer.Customize(clazz);
 #>
-    public class <#=Mapper.MapClassName(clazz)#>Map : <#=Mapper.MapClassMapping(clazz)#>
+    public class <#=clazz.ClassName#>Map : <#=Mapper.MapClassMapping(clazz)#>
     {
-        public <#=Mapper.MapClassName(clazz)#>Map()
+        public <#=clazz.ClassName#>Map()
         {
 <#
-        if (clazz.ClassType != ClassType.SubClass)
-        {
-#>
-            Table("<#=Mapper.MapTableName(clazz)#>");
-<#
-        }
+        
         PushIndent("            ");
         MapAttributes(clazz.OwnProperty, null);
         WriteLine("");

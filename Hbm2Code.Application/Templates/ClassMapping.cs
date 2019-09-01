@@ -66,8 +66,8 @@ namespace Hbm2Code.Mapping
     {
         public BaseObjectMap()
         {
-            Table("BaseObject");
             Abstract(true);
+            Table("BaseObject");
 
             Id(x => x.Id, m =>
             {
@@ -93,12 +93,25 @@ namespace Hbm2Code.Mapping
         }
     }
 
+    public class DomesticWorkerMap : SubclassMapping<DomesticWorker>
+    {
+        public DomesticWorkerMap()
+        {
+            DiscriminatorValue("DW");
+
+            Property(x => x.SocialSecurityNo, m =>
+            {
+            });
+            
+        }
+    }
+
     public class WorkerMap : ClassMapping<Worker>
     {
         public WorkerMap()
         {
-            Table("Worker");
             Abstract(true);
+            Table("Worker");
 
             Id(x => x.Id, m =>
             {
@@ -126,19 +139,6 @@ namespace Hbm2Code.Mapping
             DiscriminatorValue("FW");
 
             Property(x => x.PassportNo, m =>
-            {
-            });
-            
-        }
-    }
-
-    public class DomesticWorkerMap : SubclassMapping<DomesticWorker>
-    {
-        public DomesticWorkerMap()
-        {
-            DiscriminatorValue("DW");
-
-            Property(x => x.SocialSecurityNo, m =>
             {
             });
             

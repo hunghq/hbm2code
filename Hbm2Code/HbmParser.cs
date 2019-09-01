@@ -65,17 +65,18 @@ namespace Hbm2Code
             {
                 ClassType = ParseClassType(clazzElement),
                 ClassName = clazzElement.GetAttributeValue("name"),
-                TableName = clazzElement.TryGetAttributeValue("table"),
                 Proxy = clazzElement.TryGetAttributeValue("proxy"),
                 Extends = clazzElement.TryGetAttributeValue("extends"),
             };
 
             var clazzProp = CommonParser.ParseProperty(clazz, clazzElement);
-            clazzProp.Remove("table");
             clazzProp.Remove("proxy");
             clazzProp.Remove("extends");
+
             clazz.OwnProperty.AddAttributes(clazzProp);
             clazz.OwnProperty.TagName = clazzElement.Name.LocalName;
+            if (clazz.ClassType != ClassType.SubClass)
+                clazz.OwnProperty.AddDefault("table", clazz.ClassName);
 
             foreach (var element in clazzElement.Elements())
             {

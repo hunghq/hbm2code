@@ -31,18 +31,6 @@ namespace Hbm2Code
             {"property-ref", new PropertyRefAttributeMapper() }
         };
 
-        public static string MapTableName(ClassInfo clazz)
-        {
-            return clazz.TableName ?? clazz.ClassName;
-        }
-
-        public static string MapClassName(ClassInfo clazz)
-        {
-            return clazz.Proxy == null
-                ? clazz.ClassName
-                : Util.ToPascalCase(clazz.TableName);
-        }
-
         public static string MapClassMapping(ClassInfo clazz)
         {
             switch (clazz.ClassType)

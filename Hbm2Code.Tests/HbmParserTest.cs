@@ -38,7 +38,12 @@ namespace Hbm2Code.Tests
 
             var foreignWorker = clazzInfos.AssertHasClass("ForeignWorker", ClassType.SubClass);
             foreignWorker.OwnProperty.Should().HaveAttribute("discriminator-value", "FW");
+        }
 
+        [Fact]
+        public void ParseSubClass_InsideRootClass()
+        {
+            IList<ClassInfo> clazzInfos = TestUtils.ParseHbm("Worker.hbm.xml");
             var domesticWorker = clazzInfos.AssertHasClass("DomesticWorker", ClassType.SubClass);
             domesticWorker.OwnProperty.Should().HaveAttribute("discriminator-value", "DW");
         }

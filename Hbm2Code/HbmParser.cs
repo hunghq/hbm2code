@@ -48,7 +48,7 @@ namespace Hbm2Code
         {
             return hbmDocument.Root.Elements()
                 .Where(x => classTypes.ContainsKey(x.Name.LocalName))
-                .Select(ParseClassInfo)
+                .SelectMany(ParseClassInfo)
                 .ToList();
         }
 
@@ -59,7 +59,7 @@ namespace Hbm2Code
             throw new ArgumentException($"Unsupported class type: {clazzElement.Name.LocalName}");
         }
 
-        private ClassInfo ParseClassInfo(XElement clazzElement)
+        private IEnumerable<ClassInfo> ParseClassInfo(XElement clazzElement)
         {
             var clazz = new ClassInfo
             {
@@ -78,9 +78,18 @@ namespace Hbm2Code
             clazz.OwnProperty.TagName = clazzElement.Name.LocalName;
 
             foreach (var element in clazzElement.Elements())
-                clazz.AddChildProperty(GetPropertyParser(element).Parse(clazz, element));
+            {
+                if (classTypes.ContainsKey(element.Name.LocalName))
+                {
+                    yield return ParseClassInfo(element).FirstOrDefault();
+                }
+                else
+                {
+                    clazz.AddChildProperty(GetPropertyParser(element).Parse(clazz, element));
+                }
+            }
 
-            return clazz;
+            yield return clazz;
         }
     }
 }

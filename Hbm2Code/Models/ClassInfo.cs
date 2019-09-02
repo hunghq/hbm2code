@@ -10,7 +10,6 @@ namespace Hbm2Code
         public ClassType ClassType { get; set; }
         public string TableName { get; set; }
 
-        public string Proxy { get; set; }
         public string Extends { get; set; }
 
         public ClassInfo()

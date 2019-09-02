@@ -65,12 +65,10 @@ namespace Hbm2Code
             {
                 ClassType = ParseClassType(clazzElement),
                 ClassName = clazzElement.GetAttributeValue("name"),
-                Proxy = clazzElement.TryGetAttributeValue("proxy"),
                 Extends = clazzElement.TryGetAttributeValue("extends"),
             };
 
             var clazzProp = CommonParser.ParseProperty(clazz, clazzElement);
-            clazzProp.Remove("proxy");
             clazzProp.Remove("extends");
 
             clazz.OwnProperty.AddAttributes(clazzProp);

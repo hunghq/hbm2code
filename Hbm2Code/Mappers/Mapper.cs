@@ -36,9 +36,7 @@ namespace Hbm2Code
             switch (clazz.ClassType)
             {
                 case ClassType.RootClass:
-                    return (clazz.Proxy == null)
-                        ? $"ClassMapping<{clazz.ClassName}>"
-                        : $"ClassMapping<{ExtractProxyInterface(clazz)}>";
+                    return $"ClassMapping<{clazz.ClassName}>";
 
                 case ClassType.JoinedSubClass:
                     return $"JoinedSubclassMapping<{clazz.ClassName}>";
@@ -49,16 +47,6 @@ namespace Hbm2Code
                 default:
                     throw new ArgumentException("Invalid class type: " + clazz.ClassType);
             }
-        }
-
-        private static string ExtractProxyInterface(ClassInfo clazz)
-        {
-            var regex = new Regex(@"(\w+),");
-            var match = regex.Match(clazz.Proxy);
-            if (!match.Success)
-                throw new ArgumentException($"Class has invalid proxy interface: {clazz.Proxy}");
-
-            return match.Groups[1].Value;
         }
 
         public static string MapAttributeMethod(Property prop, string attributeName)

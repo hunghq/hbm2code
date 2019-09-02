@@ -1,9 +1,5 @@
 ﻿<#@ template debug="false" hostspecific="true" language="C#" #>
-<#@ assembly name="System.Xml.Linq" #>
-<#@ assembly name="netstandard" #>
-<#@ assembly name="$(SolutionDir)\lib\Hbm2Code.dll" #>
-<#@ import namespace="System.IO" #>
-<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="Include.Imports.t4"#>
 <#@ import namespace="System.Xml.Linq" #>
 <#@ import namespace="Hbm2Code" #>
 <#@ output extension=".hbm.xml" #>

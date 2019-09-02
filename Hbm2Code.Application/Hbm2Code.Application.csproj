@@ -98,4 +98,20 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- Configure T4 generation upon project build, however dotnet build fails to execute template engine -->
+  <PropertyGroup>
+    <Hbm2CodeLibFolder>$(MSBuildProjectDirectory)\..\lib\</Hbm2CodeLibFolder>
+  </PropertyGroup>
+  <!-- <ItemGroup>
+    <T4ParameterValues Include="Hbm2CodeLibFolder">
+      <Value>$(Hbm2CodeLibFolder)</Value>
+    </T4ParameterValues>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">16.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <TransformOnBuild>true</TransformOnBuild>
+    <TransformOutOfDateOnly>true</TransformOutOfDateOnly>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\TextTemplating\Microsoft.TextTemplating.targets" /> -->
 </Project>

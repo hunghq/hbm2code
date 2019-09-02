@@ -26,6 +26,9 @@
     <Content Include="..\Hbm2Code.DomainModels\Hbm\Agency.hbm.xml" Link="Hbm\Agency.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\Hbm2Code.DomainModels\Hbm\Area.hbm.xml" Link="Hbm\Area.hbm.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\Hbm2Code.DomainModels\Hbm\BaseObject.hbm.xml" Link="Hbm\BaseObject.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -71,7 +71,6 @@ namespace Hbm2Code.Mapping
             Id(x => x.Id, m =>
             {
                 m.Generator(Generators.Assigned);
-                m.Type(NHibernateUtil.Int64);
             });
             
             Property(x => x.Name, m =>

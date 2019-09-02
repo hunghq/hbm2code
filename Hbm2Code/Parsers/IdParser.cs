@@ -17,7 +17,6 @@ namespace Hbm2Code.Parsers
 
             var idProp = new IdProperty(clazz, prop.Name, generatorClass);
             idProp.AddAttributes(prop);
-            idProp.AddDefault("type", "Int64");
 
             generatorElement.Elements().Where(x => x.Name.LocalName == "param").ToList()
                 .ForEach(p => idProp.GeneratorParams.Add(p.GetAttributeValue("name"), p.Value));

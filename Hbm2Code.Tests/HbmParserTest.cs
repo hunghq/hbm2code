@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Hbm2Code.Tests.Utils;
-using System.Collections.Generic;
 using Xunit;
 
 namespace Hbm2Code.Tests
@@ -8,10 +7,9 @@ namespace Hbm2Code.Tests
     public class HbmParserTest
     {
         [Fact]
-        public void ParseRootClass()
+        public void ParseAbstractRootClass()
         {
-            IList<ClassInfo> clazzInfos = TestUtils.ParseHbm("BaseObject.hbm.xml");
-            var clazz = clazzInfos.AssertHasClass("BaseObject", ClassType.RootClass);
+            ClassInfo clazz = TestUtils.ParseHbm("BaseObject.hbm.xml", "BaseObject", ClassType.RootClass);
 
             clazz.OwnProperty.Should()
                 .HaveTagName("class")
@@ -22,8 +20,7 @@ namespace Hbm2Code.Tests
         [Fact]
         public void ParseJoinedSubClass()
         {
-            IList<ClassInfo> clazzInfos = TestUtils.ParseHbm("Agency.hbm.xml");
-            var clazz = clazzInfos.AssertHasClass("Agency", ClassType.JoinedSubClass);
+            ClassInfo clazz = TestUtils.ParseHbm("Agency.hbm.xml", "Agency", ClassType.JoinedSubClass);
 
             clazz.OwnProperty.Should()
                 .HaveTagName("joined-subclass")
@@ -34,8 +31,8 @@ namespace Hbm2Code.Tests
         [Fact]
         public void ParseRootClass_WithDiscriminatorColumn()
         {
-            IList<ClassInfo> clazzInfos = TestUtils.ParseHbm("Worker.hbm.xml");
-            var worker = clazzInfos.AssertHasClass("Worker", ClassType.RootClass);
+            ClassInfo worker = TestUtils.ParseHbm("Worker.hbm.xml", "Worker", ClassType.RootClass);
+
             Property discriminator = worker.GetDiscriminator();
             discriminator.Should().NotBeNull();
             discriminator.Should()
@@ -45,9 +42,8 @@ namespace Hbm2Code.Tests
         [Fact]
         public void ParseSubClass_WithDiscriminatorValue()
         {
-            IList<ClassInfo> clazzInfos = TestUtils.ParseHbm("Worker.hbm.xml");
+            ClassInfo foreignWorker = TestUtils.ParseHbm("Worker.hbm.xml", "ForeignWorker", ClassType.SubClass);
 
-            var foreignWorker = clazzInfos.AssertHasClass("ForeignWorker", ClassType.SubClass);
             foreignWorker.OwnProperty.Should()
                 .HaveAttribute("discriminator-value", "FW")
                 .NotHaveAttribute("table");
@@ -56,11 +52,76 @@ namespace Hbm2Code.Tests
         [Fact]
         public void ParseSubClass_InsideRootClass()
         {
-            IList<ClassInfo> clazzInfos = TestUtils.ParseHbm("Worker.hbm.xml");
-            var domesticWorker = clazzInfos.AssertHasClass("DomesticWorker", ClassType.SubClass);
+            ClassInfo domesticWorker = TestUtils.ParseHbm("Worker.hbm.xml", "DomesticWorker", ClassType.SubClass);
+
             domesticWorker.OwnProperty.Should()
                 .HaveAttribute("discriminator-value", "DW")
                 .NotHaveAttribute("table");
+        }
+
+        [Fact]
+        public void ParseManyToOne()
+        {
+            ClassInfo agency = TestUtils.ParseHbm("Agency.hbm.xml", "Agency", ClassType.JoinedSubClass);
+            var areaProperty = agency.GetManyToOneProperties().GetAndAssertProperty("Area", agency.ClassName);
+
+            areaProperty.Should()
+                .HaveName("Area")
+                .HaveTagName("many-to-one")
+                .HaveAttribute("column", "AreaId")
+                .HaveAttribute("lazy", "proxy")
+                .HaveAttribute("not-null", "true")
+                .HaveAttribute("foreign-key", "FK_Agency_Area");
+        }
+
+        [Fact]
+        public void ParseOneToOne()
+        {
+            ClassInfo headquarter = TestUtils.ParseHbm("Agency.hbm.xml", "HeadQuarter", ClassType.RootClass);
+            Property agencyProperty = headquarter.GetOneToOneProperties().GetAndAssertProperty("Agency", headquarter.ClassName);
+
+            agencyProperty.Should()
+                .HaveName("Agency")
+                .HaveTagName("one-to-one")
+                .HaveAttribute("constrained", "true")
+                .HaveAttribute("foreign-key", "FK_Agency_HeadQuarter");
+        }
+
+        [Fact]
+        public void ParseKeyProperty()
+        {
+            ClassInfo agency = TestUtils.ParseHbm("Agency.hbm.xml", "Agency", ClassType.JoinedSubClass);
+            Property keyProperty = agency.GetKeyProperty();
+
+            keyProperty.Should().NotBeNull();
+            keyProperty.Should()
+                .HaveName(null)
+                .HaveTagName("key")
+                .HaveAttribute("column", "Id")
+                .HaveAttribute("foreign-key", "FK_Application");
+        }
+
+        [Fact]
+        public void ParseIdProperty_AssignedId()
+        {
+            ClassInfo clazz = TestUtils.ParseHbm("BaseObject.hbm.xml", "BaseObject", ClassType.RootClass);
+            IdProperty idProperty = clazz.GetIdProperty();
+
+            idProperty.Should().NotBeNull();
+            idProperty.Should()
+                .HaveName("Id")
+                .HaveTagName("Id")
+                .HaveAttribute("type", "Int64")
+                .HaveAttribute("generator", "assigned")
+                .NotHaveAttribute("name");
+
+            idProperty.GeneratorParams.Should().NotBeNull();
+
+            idProperty.GeneratorParams.Should()
+                .HaveName("assigned")
+                .HaveTagName("generator");
+
+            idProperty.GeneratorParams.Should().BeEmpty();
         }
     }
 }

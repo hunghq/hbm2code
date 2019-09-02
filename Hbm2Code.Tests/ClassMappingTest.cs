@@ -13,11 +13,11 @@ namespace Hbm2Code.Tests
 {
     public class ClassMappingTest
     {
-        private readonly ITestOutputHelper output;
+        private readonly ITestOutputHelper logger;
 
-        public ClassMappingTest(ITestOutputHelper output)
+        public ClassMappingTest(ITestOutputHelper logger)
         {
-            this.output = output;
+            this.logger = logger;
         }
 
         [Fact]
@@ -35,14 +35,14 @@ namespace Hbm2Code.Tests
             HbmMapping mapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
             configuration.AddMapping(mapping);
 
-            output.WriteLine(mapping.AsString());
+            logger.WriteLine(mapping.AsString());
         }
 
         private void GenerateSchema(Configuration config)
         {
-            output.WriteLine("------------------------------");
+            logger.WriteLine("------------------------------");
             foreach (var script in config.GenerateSchemaCreationScript(new MsSql2012Dialect()))
-                output.WriteLine(script);
+                logger.WriteLine(script);
         }
 
         private static IEnumerable<Type> GetClassMappings()

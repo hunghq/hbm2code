@@ -1,34 +1,4 @@
 ﻿<#+
-    void CustomizeNamePropertyOfSubClassOfRmObject(Property prop)
-    {
-        if (prop != null && prop.ClassInfo != null && prop.Name == "Name" 
-            && (prop.ClassInfo.Extends == "RmObject" || prop.ClassInfo.Extends == "Ventum.Bond2.DomainModels.RmObject"))
-        {
-            prop.Name = "OwnName";
-            prop.AddDefault("column", "Name");
-            prop.AddDefault("access", "readonly");
-        }
-    }
-
-    void CustomizeNamePropertyOfSubClassOfCustomType(Property prop)
-    {
-        if (prop != null && prop.ClassInfo != null  && prop.Name == "Name" 
-            && (prop.ClassInfo.Extends == "CustomType" || prop.ClassInfo.Extends == "Ventum.Bond2.DomainModels.CustomType"))
-        {
-            prop.Name = "OwnName";
-            prop.AddDefault("column", "Name");
-            prop.AddDefault("access", "readonly");
-        }
-    }
-
-    void FixOwnerPropertyAccess(Property prop)
-    {
-        if (prop != null && prop.TagName == "many-to-one" && prop.Name == "Owner")
-        {
-            prop.AddDefault("access", "property");
-        }
-    }
-
     void MapAttributes(Property prop)
     {
         MapAttributes(prop, "m");

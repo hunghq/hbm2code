@@ -7,10 +7,7 @@
     string templatePath = Host.ResolvePath(string.Empty);
     var hbmFolder = Path.Combine(templatePath, @"..\..\Hbm2Code.DomainModels\Hbm");
 	IList<ClassInfo> clazzList = HbmLoader.LoadClassInfos(hbmFolder);
-    var customizer = new HbmCustomizer();
-    customizer.Register(CustomizeNamePropertyOfSubClassOfRmObject);
-    customizer.Register(CustomizeNamePropertyOfSubClassOfCustomType);
-    customizer.Register(FixOwnerPropertyAccess);
+    var customizer = new HbmCustomizer();    
 #>
 
 namespace Hbm2Code.Mapping

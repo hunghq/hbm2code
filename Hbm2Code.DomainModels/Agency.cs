@@ -7,7 +7,7 @@ namespace Hbm2Code.DomainModels
         public Agency()
         {
         }
-
+        public virtual string Name { get; set; }
         public virtual Guid Guid { get; set; }
         public virtual Area Area { get; set; }
     }

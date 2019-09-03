@@ -93,14 +93,6 @@ namespace Hbm2Code.Mapping
                 m.Type(NHibernateUtil.Int64);
             });
             
-            Property(x => x.Name, m =>
-            {
-                m.Type(NHibernateUtil.String);
-                m.NotNullable(false);
-                m.Length(255);
-                m.Index("IX_EntityName");
-            });
-            
             Version(x => x.Version, m =>
             {
                 m.Column("Version");

@@ -1,5 +1,10 @@
 ﻿<#+
-    void MapAttributes(Property prop)
+    void CustomizeProperty(Property prop)
+	{
+
+	}
+
+	void MapAttributes(Property prop)
     {
         MapAttributes(prop, "m");
     }

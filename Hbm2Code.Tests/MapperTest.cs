@@ -6,7 +6,7 @@ namespace Hbm2Code.Tests
     public class MapperTest
     {
         [Fact]
-        public void MapAttribute_StringValueShouldHaveDoubleQuotes()
+        public void MapAttribute_StringValue_ShouldHaveDoubleQuotes()
         {
             var prop = new Property(null, "test")
             {
@@ -17,7 +17,7 @@ namespace Hbm2Code.Tests
         }
 
         [Fact]
-        public void MapAttribute_NameHavingDashShouldBecomePascalCase()
+        public void MapAttribute_NameHavingDash_ShouldBecomePascalCase()
         {
             Mapper.MapAttributeMethod(null, "foreign-key").Should().Be("ForeignKey");
         }

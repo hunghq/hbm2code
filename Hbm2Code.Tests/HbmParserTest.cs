@@ -123,5 +123,21 @@ namespace Hbm2Code.Tests
 
             idProperty.GeneratorParams.Should().BeEmpty();
         }
+
+        [Fact]
+        public void ParseIdProperty_ForeignColumn()
+        {
+            ClassInfo clazz = TestUtils.ParseHbm("Agency.hbm.xml", "HeadQuarter", ClassType.RootClass);
+            IdProperty idProperty = clazz.GetIdProperty();
+
+            idProperty.Should()
+                .HaveName("Id")
+                .HaveTagName("Id")
+                .HaveAttribute("type", "Int64")
+                .HaveAttribute("generator", "foreign");
+
+            idProperty.GeneratorParams.Should()
+                .HaveAttribute("property", "Agency");
+        }
     }
 }

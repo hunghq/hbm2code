@@ -5,5 +5,9 @@
       <generator class="assigned" />
     </id>
     <property name="Name" />
+    <set name="Agencies" access="property" lazy="true" inverse="true" cascade="all" batch-size="20">
+      <key column="AreaId" />
+      <one-to-many class="Agency" />
+    </set>
   </class>
 </hibernate-mapping>

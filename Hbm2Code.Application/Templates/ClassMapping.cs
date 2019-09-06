@@ -77,6 +77,27 @@ namespace Hbm2Code.Mapping
             {
             });
             
+            Set(x => x.Agencies, m =>
+            {
+                m.Access(Accessor.Property);
+                m.Lazy(CollectionLazy.Lazy);
+                m.Inverse(true);
+                m.Cascade(Cascade.All);
+                m.BatchSize(20);
+                m.Key(n =>
+                {
+                    n.Column("AreaId");
+                });
+                
+            }, m =>
+            {
+                m.OneToMany(n =>
+                {
+                    n.Class(typeof(Agency));
+                });
+                
+            });
+            
         }
     }
 

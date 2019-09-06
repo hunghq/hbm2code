@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 using Hbm2Code.Tests.Utils;
+using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace Hbm2Code.Tests
@@ -138,6 +140,37 @@ namespace Hbm2Code.Tests
 
             idProperty.GeneratorParams.Should()
                 .HaveAttribute("property", "Agency");
+        }
+
+        [Fact]
+        public void ParseOneToManySet()
+        {
+            var clazz = TestUtils.ParseHbm("Area.hbm.xml", "Area", ClassType.RootClass);
+
+            clazz.GetSets().Should().HaveCount(1);
+            Set set = clazz.GetSets().Single();
+
+            set.Should()
+                .HaveName("Agencies")
+                .HaveAttribute("access", "property")
+                .HaveAttribute("lazy", "true")
+                .HaveAttribute("inverse", "true")
+                .HaveAttribute("cascade", "all")
+                .HaveAttribute("batch-size", "20");
+
+            set.KeyProperty.Should()
+                .HaveName(null)
+                .HaveTagName("key")
+                .HaveAttribute("column", "AreaId");
+
+            set.RelationProperty.Should()
+                .HaveName(null)
+                .HaveTagName("one-to-many")
+                .HaveAttribute("class", "Agency");
+
+            set.ExtendedPropertySets.Should().HaveCount(1);
+            set.ExtendedPropertySets.Single().Should().HaveCount(1);
+            set.ExtendedPropertySets.Single().Single().Should().BeSameAs(set.RelationProperty);
         }
     }
 }

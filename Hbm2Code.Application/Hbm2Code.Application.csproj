@@ -66,8 +66,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClassMapping.tt</DependentUpon>
     </Compile>
+    <Compile Include="Templates\ClassMappingRuntime.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClassMappingRuntime.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Templates\ClassMappingRuntime.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ClassMappingRuntime.cs</LastGenOutput>
+    </Content>
     <Content Include="Templates\ClassMapping.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ClassMapping.cs</LastGenOutput>
@@ -96,17 +105,23 @@
       <Project>{9b29811d-4879-4b31-a8b2-56f22bf1cdfc}</Project>
       <Name>Hbm2Code.DomainModels</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Hbm2Code\Hbm2Code.csproj">
+      <Project>{b597e06e-bea3-41d0-95f6-a8ce5ea2e2d9}</Project>
+      <Name>Hbm2Code</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- Configure T4 generation upon project build, however dotnet build fails to execute template engine -->
   <PropertyGroup>
     <Hbm2CodeLibFolder>$(MSBuildProjectDirectory)\..\lib\</Hbm2CodeLibFolder>
-  </PropertyGroup>
-  <!-- <ItemGroup>
-    <T4ParameterValues Include="Hbm2CodeLibFolder">
-      <Value>$(Hbm2CodeLibFolder)</Value>
+  </PropertyGroup>  
+  <!-- 
+  <ItemGroup>
+    <T4ParameterValues Include="HbmFolder">
+      <Value>$(MSBuildProjectDirectory)\..\Hbm2Code.DomainModels\Hbm\</Value>
     </T4ParameterValues>
   </ItemGroup>
+  
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">16.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

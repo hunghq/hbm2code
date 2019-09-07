@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Category">
+    <id name="Id" type="Int64">
+      <generator class="assigned" />
+    </id>
+    
+    <property name="Name" />
+      
+    <bag name="Items" table="CategoryItem">
+      <key column="CategoryId"/>
+      <many-to-many class="Item" column="ItemId"/>
+    </bag>
+    
+  </class>
+
+  <class name="Item">
+    <id name="Id" type="Int64">
+      <generator class="assigned" />
+    </id>
+    
+    <property name="Name" />
+
+    <list name="Categories" table="CategoryItem" inverse="true">
+      <key column="ItemId"/>
+      <many-to-many class="Category" column="CategoryId"/>
+    </list>
+  </class>
+</hibernate-mapping>

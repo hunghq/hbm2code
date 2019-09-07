@@ -32,6 +32,9 @@
     <Content Include="..\Hbm2Code.DomainModels\Hbm\BaseObject.hbm.xml" Link="Hbm\BaseObject.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\Hbm2Code.DomainModels\Hbm\Category.hbm.xml" Link="Hbm\Category.hbm.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\Hbm2Code.DomainModels\Hbm\Worker.hbm.xml" Link="Hbm\Worker.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

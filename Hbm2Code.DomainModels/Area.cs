@@ -10,6 +10,6 @@ namespace Hbm2Code.DomainModels
 
         public virtual string Name { get; set; }
 
-        public virtual ICollection<Agency> Agencies { get; protected set; }
+        public virtual ISet<Agency> Agencies { get; protected set; }
     }
 }

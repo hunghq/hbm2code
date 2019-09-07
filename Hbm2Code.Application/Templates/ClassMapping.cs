@@ -124,6 +124,81 @@ namespace Hbm2Code.Mapping
         }
     }
 
+    public class CategoryMap : ClassMapping<Category>
+    {
+        public CategoryMap()
+        {
+            Table("Category");
+
+            Id(x => x.Id, m =>
+            {
+                m.Generator(Generators.Assigned);
+                m.Type(NHibernateUtil.Int64);
+            });
+            
+            Property(x => x.Name, m =>
+            {
+            });
+            
+            Bag(x => x.Items, m =>
+            {
+                m.Table("CategoryItem");
+                m.Key(n =>
+                {
+                    n.Column("CategoryId");
+                });
+                
+            }, m =>
+            {
+                m.ManyToMany(n =>
+                {
+                    n.Class(typeof(Item));
+                    n.Column("ItemId");
+                });
+                
+            });
+            
+        }
+    }
+
+    public class ItemMap : ClassMapping<Item>
+    {
+        public ItemMap()
+        {
+            Table("Item");
+
+            Id(x => x.Id, m =>
+            {
+                m.Generator(Generators.Assigned);
+                m.Type(NHibernateUtil.Int64);
+            });
+            
+            Property(x => x.Name, m =>
+            {
+            });
+            
+            List(x => x.Categories, m =>
+            {
+                m.Table("CategoryItem");
+                m.Inverse(true);
+                m.Key(n =>
+                {
+                    n.Column("ItemId");
+                });
+                
+            }, m =>
+            {
+                m.ManyToMany(n =>
+                {
+                    n.Class(typeof(Category));
+                    n.Column("CategoryId");
+                });
+                
+            });
+            
+        }
+    }
+
     public class DomesticWorkerMap : SubclassMapping<DomesticWorker>
     {
         public DomesticWorkerMap()

@@ -2,16 +2,16 @@
 
 namespace Hbm2Code.Parsers
 {
-    public class SetParser : BasicPropertyParser
+    public class CollectionParser : BasicPropertyParser
     {
-        public SetParser() : base("set")
+        public CollectionParser(string tagName) : base(tagName)
         {
         }
 
         public override Property Parse(ClassInfo clazz, XElement element)
         {
             var prop = base.Parse(clazz, element);
-            var set = new Set(clazz, prop.Name);
+            var set = new Collection(clazz, prop.Name, TagName);
             set.AddAttributes(prop);
 
             set.KeyProperty = base.Parse(clazz, element.GetElement("key"));

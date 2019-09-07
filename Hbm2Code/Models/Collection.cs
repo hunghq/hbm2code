@@ -2,14 +2,14 @@
 
 namespace Hbm2Code
 {
-    public class Set : Property
+    public class Collection : Property
     {
         public Property KeyProperty { get; set; }
         public Property RelationProperty { get; set; }
 
-        public Set(IClassInfo classInfo, string name) : base(classInfo, name)
+        public Collection(IClassInfo classInfo, string name, string tagName) : base(classInfo, name)
         {
-            TagName = "set";
+            TagName = tagName;
         }
 
         public override IReadOnlyList<Property> ChildProperties => new List<Property>() { KeyProperty };

@@ -18,6 +18,8 @@ namespace Hbm2Code
 
         public static IList<Property> GetOneToOneProperties(this ClassInfo clazz) => clazz.GetChildProperties<Property>("one-to-one");
 
-        public static IList<Set> GetSets(this ClassInfo clazz) => clazz.GetChildProperties<Set>("set");
+        public static IList<Collection> GetSets(this ClassInfo clazz) => clazz.GetChildProperties<Collection>("set");
+
+        public static IList<Collection> GetBags(this ClassInfo clazz) => clazz.GetChildProperties<Collection>("bag");
     }
 }

@@ -26,7 +26,9 @@ namespace Hbm2Code
             new ComponentParser(),
             new CompositeIdParser(),
             new IdParser(),
-            new SetParser(),
+            new CollectionParser("bag"),
+            new CollectionParser("list"),
+            new CollectionParser("set"),
             new MapParser()
         }.ToDictionary(p => p.TagName.ToLowerInvariant());
 

@@ -148,7 +148,7 @@ namespace Hbm2Code.Tests
             var clazz = TestUtils.ParseHbm("Area.hbm.xml", "Area", ClassType.RootClass);
 
             clazz.GetSets().Should().HaveCount(1);
-            Set set = clazz.GetSets().Single();
+            Collection set = clazz.GetSets().Single();
 
             set.Should()
                 .HaveName("Agencies")
@@ -171,6 +171,27 @@ namespace Hbm2Code.Tests
             set.ExtendedPropertySets.Should().HaveCount(1);
             set.ExtendedPropertySets.Single().Should().HaveCount(1);
             set.ExtendedPropertySets.Single().Single().Should().BeSameAs(set.RelationProperty);
+        }
+
+        [Fact]
+        public void ParseManyToManyBag()
+        {
+            var clazz = TestUtils.ParseHbm("Category.hbm.xml", "Category", ClassType.RootClass);
+
+            clazz.GetBags().Should().HaveCount(1);
+            Collection bag = clazz.GetBags().Single();
+
+            bag.Should()
+                .HaveName("Items")
+                .HaveAttribute("table", "CategoryItem");
+
+            bag.KeyProperty.Should()
+                .HaveAttribute("column", "CategoryId");
+
+            bag.RelationProperty.Should()
+                .HaveTagName("many-to-many")
+                .HaveAttribute("class", "Item")
+                .HaveAttribute("column", "ItemId");
         }
     }
 }

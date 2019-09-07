@@ -23,5 +23,10 @@ namespace Hbm2Code.Tests.Utils
             string testProjectFolder = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().GetName().CodeBase).LocalPath);
             return Path.Combine(testProjectFolder, "Hbm", fileName);
         }
+
+        internal static string GetBuildDirectory()
+        {
+            return Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().GetName().CodeBase).LocalPath);
+        }
     }
 }

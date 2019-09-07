@@ -1,9 +1,11 @@
-﻿using NHibernate.Cfg;
+﻿using Hbm2Code.Tests.Utils;
+using NHibernate.Cfg;
 using NHibernate.Cfg.MappingSchema;
 using NHibernate.Dialect;
 using NHibernate.Mapping.ByCode;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Xunit;
 using Xunit.Abstractions;
@@ -41,8 +43,13 @@ namespace Hbm2Code.Tests
         private void GenerateSchema(Configuration config)
         {
             logger.WriteLine("------------------------------");
-            foreach (var script in config.GenerateSchemaCreationScript(new MsSql2012Dialect()))
+            string[] scripts = config.GenerateSchemaCreationScript(new MsSql2012Dialect());
+
+            foreach (var script in scripts)
                 logger.WriteLine(script);
+
+            string schemaPath = Path.Combine(TestUtils.GetBuildDirectory(), "schema.sql");
+            File.WriteAllLines(schemaPath, scripts);
         }
 
         private static IEnumerable<Type> GetClassMappings()

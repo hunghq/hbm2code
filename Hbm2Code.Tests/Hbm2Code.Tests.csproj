@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Hbm2Code.Application\Hbm2Code.Application.csproj" />
-    <ProjectReference Include="..\Hbm2Code.DomainModels\Hbm2Code.Tests.DomainModels.csproj" />
     <ProjectReference Include="..\Hbm2Code\Hbm2Code.csproj" />
+    <ProjectReference Include="..\Hbm2Code.Application\Hbm2Code.Application.csproj" />
+    <ProjectReference Include="..\Hbm2Code.Tests.DomainModels\Hbm2Code.Tests.DomainModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,19 +23,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\Hbm2Code.DomainModels\Hbm\Agency.hbm.xml" Link="Hbm\Agency.hbm.xml">
+    <Content Include="..\Hbm2Code.Tests.DomainModels\Hbm\Agency.hbm.xml" Link="Hbm\Agency.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Hbm2Code.DomainModels\Hbm\Area.hbm.xml" Link="Hbm\Area.hbm.xml">
+    <Content Include="..\Hbm2Code.Tests.DomainModels\Hbm\Area.hbm.xml" Link="Hbm\Area.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Hbm2Code.DomainModels\Hbm\BaseObject.hbm.xml" Link="Hbm\BaseObject.hbm.xml">
+    <Content Include="..\Hbm2Code.Tests.DomainModels\Hbm\BaseObject.hbm.xml" Link="Hbm\BaseObject.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Hbm2Code.DomainModels\Hbm\Category.hbm.xml" Link="Hbm\Category.hbm.xml">
+    <Content Include="..\Hbm2Code.Tests.DomainModels\Hbm\Category.hbm.xml" Link="Hbm\Category.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Hbm2Code.DomainModels\Hbm\Worker.hbm.xml" Link="Hbm\Worker.hbm.xml">
+    <Content Include="..\Hbm2Code.Tests.DomainModels\Hbm\Worker.hbm.xml" Link="Hbm\Worker.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

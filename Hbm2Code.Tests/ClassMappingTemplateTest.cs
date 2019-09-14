@@ -34,7 +34,7 @@ namespace Hbm2Code.Tests
 
         private static string GetHbmFolderPath()
         {
-            return Path.Combine(TestUtils.GetProjectDirectory(), @"..\Hbm2Code.DomainModels\Hbm");
+            return Path.Combine(TestUtils.GetProjectDirectory(), @"..\Hbm2Code.Tests.DomainModels\Hbm");
         }
 
         private void MapClass(ClassInfo clazz)

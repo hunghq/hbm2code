@@ -32,9 +32,23 @@ namespace Hbm2Code.Tests
             var template = new ClassMappingRuntime(new ClassMappingOption(
                 hbmFolderPath: GetHbmFolderPath(),
                 @namespace: "Hbm2Code.Tests.Generated",
-                usingNamespaces: new List<string>() { "Hbm2Code.Tests.DomainModels" }));
+                usingNamespaces: new List<string>() { "Hbm2Code.Tests.DomainModels" },
+                hbmCustomizer: GetHbmCustomizer()));
 
             File.WriteAllText(outputFile, template.TransformText());
+        }
+
+        private HbmCustomizer GetHbmCustomizer()
+        {
+            var customizer = new HbmCustomizer();
+            customizer.Register(LimitNameLength);
+            return customizer;
+
+            void LimitNameLength(Property property)
+            {
+                if (property.Name == "Name")
+                    property.AddDefault("length", "30");
+            }
         }
 
         private static string GetHbmFolderPath()

@@ -45,61 +45,53 @@ namespace Hbm2Code.Application.Templates
 foreach(var usingNamespace in Option.UsingNamespaces)
 	WriteLine($"using {usingNamespace};");
 
-            
-            #line default
-            #line hidden
-            
-            #line 10 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
-
-	IList<ClassInfo> clazzList = HbmLoader.LoadClassInfos(Option.HbmFolderPath);
-    var customizer = new HbmCustomizer();
-	customizer.Register(CustomizeProperty);
+IList<ClassInfo> clazzList = HbmLoader.LoadClassInfos(Option.HbmFolderPath);
 
             
             #line default
             #line hidden
             this.Write("\r\nnamespace ");
             
-            #line 16 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
+            #line 13 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Option.Namespace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n");
             
-            #line 18 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
+            #line 15 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
 
     foreach(var clazz in clazzList)
     {
-        customizer.Customize(clazz);
+        Option.HbmCustomizer?.Customize(clazz);
 
             
             #line default
             #line hidden
             this.Write("    public class ");
             
-            #line 23 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
+            #line 20 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(clazz.ClassName));
             
             #line default
             #line hidden
             this.Write("Map : ");
             
-            #line 23 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
+            #line 20 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Mapper.MapClassMapping(clazz)));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n        public ");
             
-            #line 25 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
+            #line 22 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(clazz.ClassName));
             
             #line default
             #line hidden
             this.Write("Map()\r\n        {\r\n");
             
-            #line 27 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
+            #line 24 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
 
         
         PushIndent("            ");
@@ -113,7 +105,7 @@ foreach(var usingNamespace in Option.UsingNamespaces)
             #line hidden
             this.Write("        }\r\n    }\r\n\r\n");
             
-            #line 38 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
+            #line 35 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
 
     }
 
@@ -126,12 +118,7 @@ foreach(var usingNamespace in Option.UsingNamespaces)
         
         #line 1 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
 
-    void CustomizeProperty(Property prop)
-	{
-
-	}
-
-	void MapAttributes(Property prop)
+    void MapAttributes(Property prop)
     {
         MapAttributes(prop, "m");
     }
@@ -178,49 +165,49 @@ foreach(var usingNamespace in Option.UsingNamespaces)
         #line default
         #line hidden
         
-        #line 50 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
+        #line 45 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
 this.Write(this.ToStringHelper.ToStringWithCulture(parentAlias));
 
         
         #line default
         #line hidden
         
-        #line 50 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
+        #line 45 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
 this.Write(this.ToStringHelper.ToStringWithCulture(Mapper.MapAttributeMethod(prop, prop.TagName)));
 
         
         #line default
         #line hidden
         
-        #line 50 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
+        #line 45 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
 this.Write("(");
 
         
         #line default
         #line hidden
         
-        #line 50 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
+        #line 45 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
 this.Write(this.ToStringHelper.ToStringWithCulture(propertyPath));
 
         
         #line default
         #line hidden
         
-        #line 50 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
+        #line 45 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
 this.Write(this.ToStringHelper.ToStringWithCulture(aliasName));
 
         
         #line default
         #line hidden
         
-        #line 50 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
+        #line 45 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
 this.Write(" =>\r\n{\r\n");
 
         
         #line default
         #line hidden
         
-        #line 52 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
+        #line 47 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
          
             PushIndent("    ");
             MapAttributes(prop, aliasName);
@@ -237,28 +224,28 @@ this.Write(" =>\r\n{\r\n");
         #line default
         #line hidden
         
-        #line 64 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
+        #line 59 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
 this.Write(this.ToStringHelper.ToStringWithCulture(parentAlias));
 
         
         #line default
         #line hidden
         
-        #line 64 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
+        #line 59 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
 this.Write(this.ToStringHelper.ToStringWithCulture(Mapper.MapAttributeMethod(prop, prop.TagName)));
 
         
         #line default
         #line hidden
         
-        #line 64 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
+        #line 59 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
 this.Write("(\r\n");
 
         
         #line default
         #line hidden
         
-        #line 65 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
+        #line 60 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
  
             PushIndent("    ");
         }
@@ -276,21 +263,21 @@ this.Write("(\r\n");
         #line default
         #line hidden
         
-        #line 78 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
+        #line 73 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
 this.Write(this.ToStringHelper.ToStringWithCulture(aliasName));
 
         
         #line default
         #line hidden
         
-        #line 78 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
+        #line 73 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
 this.Write(" =>\r\n{\r\n");
 
         
         #line default
         #line hidden
         
-        #line 80 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
+        #line 75 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
                    
                 }
                 else
@@ -300,28 +287,28 @@ this.Write(" =>\r\n{\r\n");
         #line default
         #line hidden
         
-        #line 84 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
+        #line 79 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
 this.Write("}, ");
 
         
         #line default
         #line hidden
         
-        #line 85 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
+        #line 80 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
 this.Write(this.ToStringHelper.ToStringWithCulture(aliasName));
 
         
         #line default
         #line hidden
         
-        #line 85 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
+        #line 80 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
 this.Write(" =>\r\n{\r\n");
 
         
         #line default
         #line hidden
         
-        #line 87 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
+        #line 82 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
 
                 }
 
@@ -337,14 +324,14 @@ this.Write(" =>\r\n{\r\n");
         #line default
         #line hidden
         
-        #line 97 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
+        #line 92 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
 this.Write("});\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 100 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
+        #line 95 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
 
         }
         else
@@ -355,14 +342,14 @@ this.Write("});\r\n\r\n");
         #line default
         #line hidden
         
-        #line 105 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
+        #line 100 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
 this.Write("});\r\n\r\n");
 
         
         #line default
         #line hidden
         
-        #line 108 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
+        #line 103 "C:\housane\hbm2code\Hbm2Code.Application\Templates\Include.PropertyMap.t4"
 
         }        
     }

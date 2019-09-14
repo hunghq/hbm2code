@@ -75,6 +75,7 @@ namespace Hbm2Code.Tests.Generated
             
             Property(x => x.Name, m =>
             {
+                m.Length(30);
             });
             
             Set(x => x.Agencies, m =>
@@ -138,6 +139,7 @@ namespace Hbm2Code.Tests.Generated
             
             Property(x => x.Name, m =>
             {
+                m.Length(30);
             });
             
             Bag(x => x.Items, m =>
@@ -175,6 +177,7 @@ namespace Hbm2Code.Tests.Generated
             
             Property(x => x.Name, m =>
             {
+                m.Length(30);
             });
             
             List(x => x.Categories, m =>
@@ -232,6 +235,7 @@ namespace Hbm2Code.Tests.Generated
             
             Property(x => x.Name, m =>
             {
+                m.Length(30);
             });
             
         }

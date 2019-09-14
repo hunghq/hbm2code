@@ -3,20 +3,24 @@ using System.Collections.Generic;
 
 namespace Hbm2Code
 {
-    public class HbmCustomizer
+    public interface IHbmCustomizer
     {
-        private List<Action<Property>> customizers = new List<Action<Property>>();
+        void Customize(ClassInfo classInfo);
+    }
+
+    public class HbmCustomizer : IHbmCustomizer
+    {
+        private readonly List<Action<Property>> customizers = new List<Action<Property>>();
 
         public void Register(Action<Property> customizer)
         {
             customizers.Add(customizer);
         }
 
-        public void Customize(params ClassInfo[] classInfos)
+        public void Customize(ClassInfo classInfo)
         {
-            foreach (var clazz in classInfos)
-                foreach (var prop in clazz.GetChildProperties())
-                    customizers.ForEach(customize => customize(prop));
+            foreach (var prop in classInfo.GetChildProperties())
+                customizers.ForEach(customize => customize(prop));
         }
     }
 }

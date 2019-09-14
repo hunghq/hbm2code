@@ -6,11 +6,8 @@
 <#
 foreach(var usingNamespace in Option.UsingNamespaces)
 	WriteLine($"using {usingNamespace};");
-#>
-<#
-	IList<ClassInfo> clazzList = HbmLoader.LoadClassInfos(Option.HbmFolderPath);
-    var customizer = new HbmCustomizer();
-	customizer.Register(CustomizeProperty);
+
+IList<ClassInfo> clazzList = HbmLoader.LoadClassInfos(Option.HbmFolderPath);
 #>
 
 namespace <#=Option.Namespace#>
@@ -18,7 +15,7 @@ namespace <#=Option.Namespace#>
 <#
     foreach(var clazz in clazzList)
     {
-        customizer.Customize(clazz);
+        Option.HbmCustomizer?.Customize(clazz);
 #>
     public class <#=clazz.ClassName#>Map : <#=Mapper.MapClassMapping(clazz)#>
     {

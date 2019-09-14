@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Hbm2Code.Application\Hbm2Code.Application.csproj" />
-    <ProjectReference Include="..\Hbm2Code.DomainModels\Hbm2Code.DomainModels.csproj" />
+    <ProjectReference Include="..\Hbm2Code.DomainModels\Hbm2Code.Tests.DomainModels.csproj" />
     <ProjectReference Include="..\Hbm2Code\Hbm2Code.csproj" />
   </ItemGroup>
 

@@ -1,4 +1,4 @@
-﻿using Hbm2Code.DomainModels;
-using NHibernate;
+﻿using NHibernate;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
+using Hbm2Code.Tests.DomainModels;

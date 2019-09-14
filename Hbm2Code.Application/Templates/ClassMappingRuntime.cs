@@ -38,12 +38,11 @@ namespace Hbm2Code.Application.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("using Hbm2Code.DomainModels;\r\nusing NHibernate;\r\nusing NHibernate.Mapping.ByCode;" +
-                    "\r\nusing NHibernate.Mapping.ByCode.Conformist;");
-            this.Write("\r\n");
+            this.Write("using NHibernate;\r\nusing NHibernate.Mapping.ByCode;\r\nusing NHibernate.Mapping.ByC" +
+                    "ode.Conformist;\r\nusing Hbm2Code.Tests.DomainModels;");
             this.Write("\r\n");
             
-            #line 7 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
+            #line 6 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
 
 	IList<ClassInfo> clazzList = HbmLoader.LoadClassInfos(HbmFolder);
     var customizer = new HbmCustomizer();
@@ -52,9 +51,9 @@ namespace Hbm2Code.Application.Templates
             
             #line default
             #line hidden
-            this.Write("\r\nnamespace Hbm2Code.Mapping\r\n{\r\n");
+            this.Write("\r\nnamespace Hbm2Code.Generated\r\n{\r\n");
             
-            #line 15 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
+            #line 14 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
 
     foreach(var clazz in clazzList)
     {
@@ -65,28 +64,28 @@ namespace Hbm2Code.Application.Templates
             #line hidden
             this.Write("    public class ");
             
-            #line 20 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
+            #line 19 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(clazz.ClassName));
             
             #line default
             #line hidden
             this.Write("Map : ");
             
-            #line 20 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
+            #line 19 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Mapper.MapClassMapping(clazz)));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n        public ");
             
-            #line 22 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
+            #line 21 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(clazz.ClassName));
             
             #line default
             #line hidden
             this.Write("Map()\r\n        {\r\n");
             
-            #line 24 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
+            #line 23 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
 
         
         PushIndent("            ");
@@ -100,7 +99,7 @@ namespace Hbm2Code.Application.Templates
             #line hidden
             this.Write("        }\r\n    }\r\n\r\n");
             
-            #line 35 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
+            #line 34 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
 
     }
 

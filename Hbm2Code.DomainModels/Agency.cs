@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hbm2Code.DomainModels
+namespace Hbm2Code.Tests.DomainModels
 {
     public class Agency : BaseObject
     {

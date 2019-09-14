@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hbm2Code.DomainModels", "Hbm2Code.DomainModels\Hbm2Code.DomainModels.csproj", "{9B29811D-4879-4B31-A8B2-56F22BF1CDFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hbm2Code.Tests.DomainModels", "Hbm2Code.DomainModels\Hbm2Code.Tests.DomainModels.csproj", "{9B29811D-4879-4B31-A8B2-56F22BF1CDFC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hbm2Code", "Hbm2Code\Hbm2Code.csproj", "{B597E06E-BEA3-41D0-95F6-A8CE5EA2E2D9}"
 EndProject

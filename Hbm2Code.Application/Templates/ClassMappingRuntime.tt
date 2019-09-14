@@ -3,14 +3,13 @@
 <#@ include file="Include.Imports.t4"#>
 <#@ include file="Include.Usings.t4"#>
 <#@ include file="Include.PropertyMap.t4"#>
-
 <#
 	IList<ClassInfo> clazzList = HbmLoader.LoadClassInfos(HbmFolder);
     var customizer = new HbmCustomizer();
 	customizer.Register(CustomizeProperty);
 #>
 
-namespace Hbm2Code.Mapping
+namespace Hbm2Code.Generated
 {
 <#
     foreach(var clazz in clazzList)

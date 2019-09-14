@@ -101,7 +101,10 @@
   <!-- Configure T4 generation upon project build, however dotnet build fails to execute template engine -->
   <PropertyGroup>
     <Hbm2CodeLibFolder>$(MSBuildProjectDirectory)\..\lib\</Hbm2CodeLibFolder>
-  </PropertyGroup>  
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(TargetDir)$(TargetName).dll" "$(ProjectDir)..\lib\$(TargetName).dll"</PostBuildEvent>
+  </PropertyGroup>
   <!-- 
   <ItemGroup>
     <T4ParameterValues Include="HbmFolder">

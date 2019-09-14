@@ -61,11 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Templates\ClassMapping.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ClassMapping.tt</DependentUpon>
-    </Compile>
     <Compile Include="Templates\ClassMappingRuntime.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -76,10 +71,6 @@
     <Content Include="Templates\ClassMappingRuntime.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>ClassMappingRuntime.cs</LastGenOutput>
-    </Content>
-    <Content Include="Templates\ClassMapping.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ClassMapping.cs</LastGenOutput>
     </Content>
     <Content Include="Templates\NamedQueries.hbm.xml">
       <AutoGen>True</AutoGen>
@@ -101,10 +92,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Hbm2Code.DomainModels\Hbm2Code.DomainModels.csproj">
-      <Project>{9b29811d-4879-4b31-a8b2-56f22bf1cdfc}</Project>
-      <Name>Hbm2Code.DomainModels</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Hbm2Code\Hbm2Code.csproj">
       <Project>{b597e06e-bea3-41d0-95f6-a8ce5ea2e2d9}</Project>
       <Name>Hbm2Code</Name>

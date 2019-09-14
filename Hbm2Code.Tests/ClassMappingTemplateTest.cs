@@ -27,14 +27,14 @@ namespace Hbm2Code.Tests
         [Fact]
         public void ExecuteRuntimeTemplate_ShouldGenerateMappingSuccessfully()
         {
-            string output = Path.Combine(TestUtils.GetBuildDirectory(), $"{nameof(ClassMappingRuntime)}.cs");
+            string output = Path.Combine(TestUtils.GetProjectDirectory(), "Generated", "GeneratedMappings.cs");
             var template = new ClassMappingRuntime(GetHbmFolderPath());
             File.WriteAllText(output, template.TransformText());
         }
 
         private static string GetHbmFolderPath()
         {
-            return Path.Combine(TestUtils.GetBuildDirectory(), @"..\..\..\..\Hbm2Code.DomainModels\Hbm");
+            return Path.Combine(TestUtils.GetProjectDirectory(), @"..\Hbm2Code.DomainModels\Hbm");
         }
 
         private void MapClass(ClassInfo clazz)

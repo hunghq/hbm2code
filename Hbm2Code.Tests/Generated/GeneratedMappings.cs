@@ -1,7 +1,8 @@
-﻿using Hbm2Code.DomainModels;
+using Hbm2Code.DomainModels;
 using NHibernate;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
+
 
 namespace Hbm2Code.Mapping
 {

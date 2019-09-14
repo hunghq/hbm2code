@@ -25,35 +25,49 @@ namespace Hbm2Code.Application.Templates
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "16.0.0.0")]
     public partial class ClassMappingRuntime : ClassMappingRuntimeBase
     {
-#line hidden
-        public ClassMappingRuntime(string hbmFolder)
+        public ClassMappingRuntime(ClassMappingOption option)
         {
-            HbmFolder = hbmFolder;
+            Option = option;
         }
-
-        public string HbmFolder { get; }
-
+        public ClassMappingOption Option { get; }
+#line hidden
         /// <summary>
         /// Create the template output
         /// </summary>
         public virtual string TransformText()
         {
             this.Write("using NHibernate;\r\nusing NHibernate.Mapping.ByCode;\r\nusing NHibernate.Mapping.ByC" +
-                    "ode.Conformist;\r\nusing Hbm2Code.Tests.DomainModels;");
+                    "ode.Conformist;");
             this.Write("\r\n");
             
             #line 6 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
 
-	IList<ClassInfo> clazzList = HbmLoader.LoadClassInfos(HbmFolder);
+foreach(var usingNamespace in Option.UsingNamespaces)
+	WriteLine($"using {usingNamespace};");
+
+            
+            #line default
+            #line hidden
+            
+            #line 10 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
+
+	IList<ClassInfo> clazzList = HbmLoader.LoadClassInfos(Option.HbmFolderPath);
     var customizer = new HbmCustomizer();
 	customizer.Register(CustomizeProperty);
 
             
             #line default
             #line hidden
-            this.Write("\r\nnamespace Hbm2Code.Generated\r\n{\r\n");
+            this.Write("\r\nnamespace ");
             
-            #line 14 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
+            #line 16 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Option.Namespace));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n{\r\n");
+            
+            #line 18 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
 
     foreach(var clazz in clazzList)
     {
@@ -64,28 +78,28 @@ namespace Hbm2Code.Application.Templates
             #line hidden
             this.Write("    public class ");
             
-            #line 19 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
+            #line 23 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(clazz.ClassName));
             
             #line default
             #line hidden
             this.Write("Map : ");
             
-            #line 19 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
+            #line 23 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Mapper.MapClassMapping(clazz)));
             
             #line default
             #line hidden
             this.Write("\r\n    {\r\n        public ");
             
-            #line 21 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
+            #line 25 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(clazz.ClassName));
             
             #line default
             #line hidden
             this.Write("Map()\r\n        {\r\n");
             
-            #line 23 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
+            #line 27 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
 
         
         PushIndent("            ");
@@ -99,7 +113,7 @@ namespace Hbm2Code.Application.Templates
             #line hidden
             this.Write("        }\r\n    }\r\n\r\n");
             
-            #line 34 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
+            #line 38 "C:\housane\hbm2code\Hbm2Code.Application\Templates\ClassMappingRuntime.tt"
 
     }
 

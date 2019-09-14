@@ -3,7 +3,7 @@ using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
 using Hbm2Code.Tests.DomainModels;
 
-namespace Hbm2Code.Generated
+namespace Hbm2Code.Tests.Generated
 {
     public class AgencyMap : JoinedSubclassMapping<Agency>
     {

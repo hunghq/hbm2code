@@ -1,5 +1,7 @@
-﻿using Hbm2Code.Application.Templates;
+﻿using Hbm2Code.Application;
+using Hbm2Code.Application.Templates;
 using Hbm2Code.Tests.Utils;
+using System.Collections.Generic;
 using System.IO;
 using Xunit;
 using Xunit.Abstractions;
@@ -18,18 +20,21 @@ namespace Hbm2Code.Tests
         [Fact]
         public void LoadAndMapAllHbmFiles_ShouldPass()
         {
-            string hbmFolder = GetHbmFolderPath();
-
-            foreach (var clazz in HbmLoader.LoadClassInfos(hbmFolder))
+            foreach (var clazz in HbmLoader.LoadClassInfos(GetHbmFolderPath()))
                 MapClass(clazz);
         }
 
         [Fact]
         public void ExecuteRuntimeTemplate_ShouldGenerateMappingSuccessfully()
         {
-            string output = Path.Combine(TestUtils.GetProjectDirectory(), "Generated", "GeneratedMappings.cs");
-            var template = new ClassMappingRuntime(GetHbmFolderPath());
-            File.WriteAllText(output, template.TransformText());
+            string outputFile = Path.Combine(TestUtils.GetProjectDirectory(), "Generated", "GeneratedMappings.cs");
+
+            var template = new ClassMappingRuntime(new ClassMappingOption(
+                hbmFolderPath: GetHbmFolderPath(),
+                @namespace: "Hbm2Code.Tests.Generated",
+                usingNamespaces: new List<string>() { "Hbm2Code.Tests.DomainModels" }));
+
+            File.WriteAllText(outputFile, template.TransformText());
         }
 
         private static string GetHbmFolderPath()

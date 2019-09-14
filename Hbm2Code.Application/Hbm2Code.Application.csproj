@@ -60,6 +60,7 @@
     <Reference Include="netstandard" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassMappingOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Templates\ClassMappingRuntime.cs">
       <AutoGen>True</AutoGen>

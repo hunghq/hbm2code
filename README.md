@@ -8,7 +8,7 @@ Convert NHibernate XML mapping to Code mapping
 
 ## How it works
 
-### Input [Hbm mapping files](Hbm2Code.DomainModels/Hbm)
+### Input [Hbm mapping files](Hbm2Code.Tests.DomainModels/Hbm)
 
 ```xml
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
@@ -31,7 +31,7 @@ Convert NHibernate XML mapping to Code mapping
 </hibernate-mapping>
 ```
 
-### Output [Classes with Mapping by Code](Hbm2Code.Application/Templates/ClassMapping.cs)
+### Output [Classes with Mapping by Code](Hbm2Code.Tests/Generated/GeneratedMappings.cs)
 
 ```csharp
 public class WorkerMap : ClassMapping<Worker>
